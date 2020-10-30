@@ -26,6 +26,7 @@ router.post('/lists/create', userController.createList);
 router.post('/lists/update', userController.updateList);
 
 // Items
+router.post('/items/', userController.getAllItems);
 router.post('/items/create', userController.createItem);
 router.post('/items/update', userController.updateItem);
 router.post('/items/delete', userController.deleteItem);

@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import CardWishList from '../components/CardWishList';
 import PageBanner from '../components/PageBanner';
 
-const WishListsPage = ({ user, setPage }) => {
+const WishListsPage = ({ user, setPage, something }) => {
+
+  let history = useHistory();
+
+  console.log(history.location.state ? history.location.state.id : 'no id');
 
   const pageTitle = "WishLists"
   const [lists, setLists] = useState([]);
 
   useEffect(() => {
+
     setLists(user.lists)
     setPage({
       backBtn: false,
@@ -19,7 +24,7 @@ const WishListsPage = ({ user, setPage }) => {
     })
   }, [setPage, user.lists])
 
-  return(
+  return (
     <>
       <PageBanner pageTitle={pageTitle} />
       {lists && lists.length

@@ -11,5 +11,6 @@ app.use(bodyParser.json());
 app.use(expressValidator());
 
 app.use('/', routes);
+// app.use('/items', items)
 
 module.exports = app;

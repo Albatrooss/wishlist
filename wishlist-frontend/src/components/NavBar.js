@@ -4,10 +4,10 @@ import GroupIcon from '@material-ui/icons/Group';
 import ListIcon from '@material-ui/icons/List';
 
 const NavBar = ({ className }) => {
-  return(
+  return (
     <>
       <nav id="nav" className={`nav ${className}`}>
-        <NavLink className="nav-icon-link" to="/wishlists">
+        <NavLink className="nav-icon-link" to={{ pathname: '/wishlists', state: { id: '123' } }} >
           <ListIcon />
           <span className="nav-icon-label">Wishlists</span>
         </NavLink>

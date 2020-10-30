@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
+const Item = require('../models/Item');
 // const { promisify } = require('es6-promisify');
 const bcrypt = require('bcrypt');
 // const { update } = require('../models/User');
@@ -27,18 +28,18 @@ exports.signIn = async (req, res, next) => {
     });
     const user = await User.findOne({ email: req.body.email });
     bcrypt.compare(req.body.password, user.password)
-      .then(function(result) {
+      .then(function (result) {
         if (result) {
           res.json(user)
         } else {
-          res.json({ err: "Invalid email or password."})
+          res.json({ err: "Invalid email or password." })
         }
       })
       .catch(err => {
         res.json({ err });
       })
   } catch (err) {
-    res.json({err: "Unable to log in."});
+    res.json({ err: "Unable to log in." });
   }
 }
 
@@ -56,7 +57,7 @@ exports.validateUser = async (req, res, next) => {
   req.checkBody('password', 'Password cannot be blank!').notEmpty();
   req.checkBody('password-confirm', 'Password confirm cannot be blank!').notEmpty();
   req.checkBody('password-confirm', 'Password confirm has to match!').equals(req.body.password);
-  
+
   const errors = req.validationErrors();
   if (errors) {
     let errs = []
@@ -82,7 +83,7 @@ exports.signUp = async (req, res, next) => {
       console.log(newUser, user);
       next();
     } catch {
-      res.status(400).json({ err: 'Email taken!'});
+      res.status(400).json({ err: 'Email taken!' });
     }
     // res.json(newUser);
   });
@@ -114,6 +115,25 @@ exports.updateList = async (req, res) => {
     res.json(updatedUser);
   } catch {
     res.status(500).json({ err: "Unable to update list." })
+  }
+}
+
+/*
+exports.createItem = async (req, res) => {
+  try {
+    
+  } catch(err) {
+    validationError(res, err);
+  }
+}
+*/
+
+exports.getAllItems = async (req, res) => {
+  try {
+    let users = await User.find({});
+    res.json({ users });
+  } catch (err) {
+    res.json({ err })
   }
 }
 

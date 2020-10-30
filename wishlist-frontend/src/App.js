@@ -70,7 +70,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      {user && user.email ? <Header user={user} page={page} /> : null }
+      {user && user.email ? <Header user={user} page={page} /> : null}
       <main id="main" role="main">
         {errors.length ? <ErrorList errs={errors} setErrors={setErrors} /> : null}
         <Switch>
